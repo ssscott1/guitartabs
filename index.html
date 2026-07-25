@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TabHero — Learn Guitar Tabs the Fun Way</title>
+  <meta name="description" content="An interactive, beginner-friendly way to learn to read guitar tabs, link riffs together, and play real songs in time.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎸</text></svg>">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="logo">🎸 <span>Tab<em>Hero</em></span></div>
+  <div class="progress-pips" id="progress-pips" title="Your lesson progress"></div>
+</header>
+
+<nav class="lesson-nav" id="lesson-nav">
+  <button data-lesson="1"><span class="step">1</span> Read Tabs</button>
+  <button data-lesson="2"><span class="step">2</span> Note Quiz</button>
+  <button data-lesson="3"><span class="step">3</span> First Riffs</button>
+  <button data-lesson="4"><span class="step">4</span> Link It Up</button>
+  <button data-lesson="5"><span class="step">5</span> Play Songs</button>
+</nav>
+
+<main>
+
+  <!-- ══════════════ LESSON 1 : READING TABS ══════════════ -->
+  <section class="lesson" id="lesson-1">
+    <h1>📖 Lesson 1 — How to Read a Tab</h1>
+    <p class="lead">Guitar tablature (<strong>“tab”</strong>) is the easiest way to read music for guitar.
+    No sheet music required — if you can count to 22, you can read tab.</p>
+
+    <div class="card">
+      <h2>The six lines are your six strings</h2>
+      <p>A tab has 6 horizontal lines. <strong>Careful — it looks upside down at first!</strong>
+      The <em>top</em> line is your <em>thinnest</em> string (high&nbsp;e), and the <em>bottom</em> line is the
+      <em>thickest</em> string (low&nbsp;E) — exactly what you see when you lean over and look down at your own guitar.</p>
+      <pre class="tab-example">e |—————————————   ← thinnest string (closest to the floor)
+B |—————————————
+G |—————————————
+D |—————————————
+A |—————————————
+E |—————————————   ← thickest string (closest to your face)</pre>
+      <p>👇 <strong>Try it!</strong> This is a virtual fretboard laid out the same way as a tab.
+      Click the <span class="chip">0</span> column to hear each open string — then explore the frets.</p>
+      <div id="fretboard-intro"></div>
+    </div>
+
+    <div class="card">
+      <h2>The numbers are frets, not fingers</h2>
+      <p>A number on a line means: <strong>press that fret on that string, then pick it</strong>.
+      A <span class="chip">0</span> means play the string <em>open</em> (no fingers). Read left&nbsp;to&nbsp;right, like a book.</p>
+      <pre class="tab-example">e |——0——2——3——|      play the high e string:
+B |———————————|      open, then 2nd fret, then 3rd fret
+G |———————————|</pre>
+      <p>Here's a mini melody using just the high e string. Press play and watch the
+      highlight move through the tab — that's the order you play the notes in. Click any number to hear just that note.</p>
+      <div id="player-demo1"></div>
+    </div>
+
+    <div class="card">
+      <h2>Stacked numbers = play together</h2>
+      <p>When numbers are stacked in the same column, you play those strings <strong>at the same time</strong> —
+      that's a chord. Numbers one after another are played one at a time. That's basically all of tab!</p>
+      <pre class="tab-example">e |——————0——|
+B |——————1——|   ← three stacked numbers:
+G |——————0——|     strum them together (a C major chord!)
+D |——2———2——|
+A |——3———3——|   ← two separate numbers first:
+E |—————————|     play them one at a time</pre>
+      <div id="player-demo2"></div>
+    </div>
+
+    <div class="done-row">
+      <button class="btn btn-done" data-complete="1">✓ Got it — I can read a tab!</button>
+    </div>
+  </section>
+
+  <!-- ══════════════ LESSON 2 : NOTE QUIZ ══════════════ -->
+  <section class="lesson" id="lesson-2" hidden>
+    <h1>🎯 Lesson 2 — Find That Note!</h1>
+    <p class="lead">Time to make it stick. We show you a note in tab —
+    you find it on the fretboard. Get <strong>8 out of 10</strong> to pass.</p>
+
+    <div class="card quiz-card">
+      <div class="quiz-status">
+        <span id="quiz-round">Ready?</span>
+        <span id="quiz-score"></span>
+        <span id="quiz-best"></span>
+      </div>
+      <div class="quiz-stage">
+        <div class="quiz-prompt">
+          <p id="quiz-instruction">Press <strong>Start</strong> and click the fretboard position shown in the tab.</p>
+          <pre class="tab-example quiz-tab" id="quiz-tab" hidden></pre>
+          <div id="quiz-feedback" class="quiz-feedback"></div>
+        </div>
+        <div id="fretboard-quiz"></div>
+      </div>
+      <div class="quiz-controls">
+        <button class="btn btn-primary" id="quiz-start">▶ Start Quiz</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════ LESSON 3 : FIRST RIFFS ══════════════ -->
+  <section class="lesson" id="lesson-3" hidden>
+    <h1>🤘 Lesson 3 — Your First Riffs</h1>
+    <p class="lead">A <strong>riff</strong> is a short, repeatable phrase — the LEGO brick of every song.
+    Learn each one slowly, loop it until it's boring, <em>then</em> speed it up.</p>
+
+    <div class="card">
+      <h2>Riff 1 · “Thunder Steps” <span class="tag">one string only</span></h2>
+      <p>Everything happens on the low E string (bottom line). Use the
+      <strong>Loop</strong> switch and drag the tempo down to 60–70% until your fingers know the way.</p>
+      <div id="player-riff1"></div>
+    </div>
+
+    <div class="card">
+      <h2>Riff 2 · “The Staircase” <span class="tag">E minor pentatonic</span></h2>
+      <p>This walks up the most famous scale in rock — up one bar, back down the next.
+      Notice how the tab moves from the bottom line (thick strings) toward the top (thin strings) as the notes go higher.</p>
+      <div id="player-riff2"></div>
+    </div>
+
+    <div class="card">
+      <h2>Riff 3 · “Boogie Bar” <span class="tag">two notes at once</span></h2>
+      <p>Stacked numbers! Hold the low E open and rock your finger between frets 2 and 4 on the A string.
+      This exact move powers about a million blues and rock'n'roll songs.</p>
+      <div id="player-riff3"></div>
+    </div>
+
+    <div class="done-row">
+      <button class="btn btn-done" data-complete="3">✓ I can play a riff!</button>
+    </div>
+  </section>
+
+  <!-- ══════════════ LESSON 4 : LINKING ══════════════ -->
+  <section class="lesson" id="lesson-4" hidden>
+    <h1>🔗 Lesson 4 — Link It Up</h1>
+    <p class="lead">Songs are just riffs glued together <strong>without stopping the beat</strong>.
+    The secret: while your pick plays the <em>last</em> note of riff A, your eyes and fretting hand
+    are already moving to the <em>first</em> note of riff B.</p>
+
+    <div class="card">
+      <h2>Step 1 · Riff A, on its own</h2>
+      <div id="player-linkA"></div>
+    </div>
+    <div class="card">
+      <h2>Step 2 · Riff B, on its own</h2>
+      <p>Same shape as riff A, moved to the A string — so the transition is just a small hop of your hand.</p>
+      <div id="player-linkB"></div>
+    </div>
+    <div class="card">
+      <h2>Step 3 · A + B, seamlessly</h2>
+      <p>Now play them back-to-back. Turn on <strong>Loop</strong> and keep going around: A → B → A → B…
+      If you stumble at the seam, slow down — a clean slow loop beats a sloppy fast one, every time.</p>
+      <div id="player-linkAB"></div>
+      <div class="trainer-row">
+        <label class="switch-label">
+          <input type="checkbox" id="speed-trainer">
+          <span>🚀 <strong>Speed Trainer</strong> — each time the loop repeats, tempo climbs +5% (up to 120%). How far can you keep up?</span>
+        </label>
+      </div>
+    </div>
+
+    <div class="done-row">
+      <button class="btn btn-done" data-complete="4">✓ I can link riffs together!</button>
+    </div>
+  </section>
+
+  <!-- ══════════════ LESSON 5 : SONGS ══════════════ -->
+  <section class="lesson" id="lesson-5" hidden>
+    <h1>🎵 Lesson 5 — Play Real Songs</h1>
+    <p class="lead">Everything comes together: read the tab, keep the timing, play the song.
+    Use <strong>Listen</strong> to hear it, then flip on <strong>🎮 Play-Along</strong> to test your timing —
+    tap <kbd>Space</kbd> (or the big pad) exactly when each note should sound. You get a 4-beat count-in.</p>
+
+    <div class="song-picker" id="song-picker"></div>
+
+    <div class="card">
+      <div class="song-header">
+        <h2 id="song-title"></h2>
+        <div class="song-stars" id="song-stars" title="Your best play-along score"></div>
+      </div>
+      <p id="song-blurb" class="song-blurb"></p>
+      <div id="player-song"></div>
+
+      <div class="playalong-row">
+        <label class="switch-label">
+          <input type="checkbox" id="playalong-toggle">
+          <span>🎮 <strong>Play-Along Mode</strong> — you play the notes, we keep the beat</span>
+        </label>
+      </div>
+
+      <div id="playalong-ui" hidden>
+        <div class="pa-hud">
+          <div class="pa-stat"><span id="pa-combo">0</span><label>combo</label></div>
+          <div class="pa-msg" id="pa-msg">Press play, wait for the count-in…</div>
+          <div class="pa-stat"><span id="pa-score">0</span><label>points</label></div>
+        </div>
+        <button id="tap-pad" class="tap-pad">TAP<small>or press Space</small></button>
+      </div>
+      <div id="pa-results" class="pa-results" hidden></div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <p>🎸 TabHero — made for total beginners. All songs are traditional / public-domain melodies (simplified arrangements).
+  Sound is synthesized live in your browser — no recordings, no downloads.</p>
+</footer>
+
+<script src="js/audio.js"></script>
+<script src="js/data.js"></script>
+<script src="js/fretboard.js"></script>
+<script src="js/tabplayer.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
