@@ -380,10 +380,10 @@
   }
 
   /* ── chords lesson 4 : progressions + speed trainer ────────── */
-  makePlayer('#player-gEm', TabData.chordDrills.gEm, { loop: true });
-  makePlayer('#player-cD', TabData.chordDrills.cD, { loop: true });
+  makePlayer('#player-gEm', TabData.chordDrills.gEm, { loop: true, view: 'chords' });
+  makePlayer('#player-cD', TabData.chordDrills.cD, { loop: true, view: 'chords' });
   wireSpeedTrainer('#c-speed-trainer', makePlayer('#player-magic', TabData.chordDrills.magic, {
-    loop: true, metronome: true,
+    loop: true, metronome: true, view: 'chords',
   }));
 
   /* ══════════════ SONG LESSONS (shared by both tracks) ══════════════ */
@@ -400,7 +400,7 @@
 
   /* Wire up one full song lesson (picker, player, play-along game).
    * prefix: '' for the Tabs track, 'c-' for the Chords track. */
-  function wireSongLesson(prefix, songs, starsKey, lessonId) {
+  function wireSongLesson(prefix, songs, starsKey, lessonId, playerOpts = {}) {
     const $id = name => document.getElementById(prefix + name);
     const picker = $id('song-picker');
     const titleEl = $id('song-title');
@@ -430,6 +430,7 @@
     }
 
     const player = makePlayer('#' + prefix + 'player-song', current, {
+      ...playerOpts,
       metronome: false,
       onPlayAlongEnd: showResults,
       onPlayStateChange: (playing) => {
@@ -508,7 +509,7 @@
   }
 
   const songPlayer = wireSongLesson('', TabData.songs, 'songStars', '5');
-  const chordSongPlayer = wireSongLesson('c-', TabData.chordSongs, 'chordSongStars', 'c5');
+  const chordSongPlayer = wireSongLesson('c-', TabData.chordSongs, 'chordSongStars', 'c5', { view: 'chords' });
 
   /* ── boot ──────────────────────────────────────────────────── */
   setMode(localStorage.getItem(MODE_KEY) === 'chords' ? 'chords' : 'tabs');

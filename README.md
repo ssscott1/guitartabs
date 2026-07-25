@@ -33,8 +33,11 @@ and it works as-is.
 | 1 | **Read Tabs** — the six lines and numbers, clickable fretboard, playable examples | **Read Chords** — chord-chart anatomy plus all 10 beginner chords as tap-to-strum cards, grouped in families |
 | 2 | **Note Quiz** — see a note in tab, find it on the fretboard (8/10 to pass) | **Chord Quiz** — see a chart, name the chord from the Lesson 1 toolbox (8/10 to pass) |
 | 3 | **First Riffs** — three looping riffs with tempo control | **First Changes** — Em↔Am, Am↔C, G↔D drills with anchor-finger tips |
-| 4 | **Link It Up** — join riff A to riff B + Speed Trainer (+5%/loop) | **Progressions** — build G–Em–C–D + Speed Trainer |
-| 5 | **Play Songs** — five melodies with tap-along scoring and stars | **Strum Songs** — five chord songs, names above the tab, strum-along scoring |
+| 4 | **Link It Up** — join riff A to riff B + Speed Trainer (+5%/loop) | **Progressions** — build G–Em–C–D shown as chord charts + Speed Trainer |
+| 5 | **Play Songs** — five melodies with tap-along scoring and stars | **Strum Songs** — five chord songs shown as chord charts with strum dots, strum-along scoring |
+
+There's also a standalone printable reference (`chords.html`, linked from
+Read Chords) with all 10 chords on one page.
 
 All playback runs through the same engine: scrolling highlight, tempo
 slider, loop, metronome, count-in, and **Play-Along Mode** (tap Space or the
@@ -51,6 +54,7 @@ remembered in `localStorage`) overrides it.
 | File | What it does |
 | --- | --- |
 | `index.html` | All ten lesson pages, both tracks (single-page app) |
+| `chords.html` | Printable one-page chord reference |
 | `css/style.css` | The whole look |
 | `js/audio.js` | Guitar synth + metronome (Web Audio API) |
 | `js/chords.js` | Chord shapes, strum helper, clickable chord-chart component |

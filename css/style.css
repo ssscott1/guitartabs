@@ -192,6 +192,11 @@ kbd {
   cursor: pointer;
   transition: transform 0.1s, filter 0.15s;
 }
+a.btn { display: inline-block; text-decoration: none; }
+.btn-ghost {
+  background: var(--bg-soft); color: var(--ink);
+  border: 1px solid var(--card-edge);
+}
 .btn:hover { filter: brightness(1.1); }
 .btn:active { transform: scale(0.96); }
 .btn-primary { background: var(--amber); color: #241a02; }
@@ -386,6 +391,37 @@ kbd {
 .cd-dot { fill: var(--amber); }
 .cd-finger { fill: #241a02; font-weight: 800; font-size: 13px; }
 .cd-hint { color: var(--ink-dim); font-size: 0.7rem; margin-top: 4px; }
+
+/* ── chord-chart player view (progressions & strum songs) ─── */
+
+.chord-strip { padding: 14px 12px; }
+.cs-row { display: flex; gap: 14px; width: max-content; align-items: stretch; }
+.cs-block {
+  display: flex; flex-direction: column; align-items: center; justify-content: space-between;
+  border: 1px solid var(--card-edge);
+  border-radius: 12px;
+  padding: 8px 10px 10px;
+  transition: border-color 0.15s, background 0.15s;
+}
+.cs-block.playing {
+  border-color: var(--amber);
+  background: rgba(251, 191, 36, 0.08);
+}
+.cs-block .chord-card { border: none; background: transparent; padding: 0; }
+.cs-block svg.cd { width: 96px; }
+.cs-dots { display: flex; gap: 6px; justify-content: center; margin-top: 8px; }
+.cs-dot {
+  width: 24px; height: 24px; border-radius: 50%;
+  display: grid; place-items: center;
+  font-size: 0.72rem; font-weight: 700; font-family: var(--mono);
+  color: var(--ink-dim);
+  background: var(--bg-soft);
+  border: 1px solid var(--card-edge);
+}
+.cs-dot.playing { background: var(--amber); border-color: var(--amber); color: #241a02; }
+.cs-dot.hit-perfect { background: var(--green); border-color: var(--green); color: #06230f; }
+.cs-dot.hit-good { background: var(--amber-deep); border-color: var(--amber-deep); color: #241a02; }
+.cs-dot.hit-miss { background: var(--red); border-color: var(--red); color: #2b0505; }
 
 /* ── chord quiz ───────────────────────────────────────────── */
 

@@ -53,7 +53,56 @@ class TabPlayer {
     this.el.classList.add('tabplayer');
     this.el.innerHTML = '';
     this.el.appendChild(this._buildControls());
+    if (this.opts.view === 'chords' && this.song.labels && this.song.labels.length) {
+      this._renderChordView();
+    } else {
+      this._renderTabView();
+    }
+  }
 
+  /* Chord-chart view (Chords track): one chart per chord change with a
+   * strum dot for every beat, instead of the six-line tab grid. */
+  _renderChordView() {
+    const scroller = document.createElement('div');
+    scroller.className = 'tab-scroll chord-strip';
+    const strip = document.createElement('div');
+    strip.className = 'cs-row';
+    scroller.appendChild(strip);
+    this.el.appendChild(scroller);
+    this.scroller = scroller;
+
+    const res = this.song.res || 1;
+    const bpb = this.song.beatsPerBar;
+    const labels = this.song.labels;
+    this.cols = [];
+
+    for (let i = 0; i < labels.length; i++) {
+      const start = labels[i].t;
+      const end = i + 1 < labels.length ? labels[i + 1].t : this.totalBeats;
+
+      const block = document.createElement('div');
+      block.className = 'cs-block';
+      const holder = document.createElement('div');
+      block.appendChild(holder);
+      new GuitarChords.ChordDiagram(holder, labels[i].name, { hint: false });
+
+      const dots = document.createElement('div');
+      dots.className = 'cs-dots';
+      for (const g of this.groups) {
+        if (g.t < start || g.t >= end) continue;
+        const dot = document.createElement('span');
+        dot.className = 'cs-dot';
+        dot.textContent = String(Math.floor(g.t) % bpb + 1);
+        dot._block = block;
+        dots.appendChild(dot);
+        this.cols[Math.round(g.t / res)] = dot;
+      }
+      block.appendChild(dots);
+      strip.appendChild(block);
+    }
+  }
+
+  _renderTabView() {
     const scroller = document.createElement('div');
     scroller.className = 'tab-scroll';
     const grid = document.createElement('div');
@@ -286,12 +335,18 @@ class TabPlayer {
 
   _setCol(c) {
     if (c === this._curCol) return;
-    if (this._curCol >= 0 && this.cols[this._curCol]) this.cols[this._curCol].classList.remove('playing');
+    const prev = this._curCol >= 0 ? this.cols[this._curCol] : null;
+    if (prev) {
+      prev.classList.remove('playing');
+      if (prev._block) prev._block.classList.remove('playing');
+    }
     this._curCol = c;
-    if (c >= 0 && this.cols[c]) {
-      const col = this.cols[c];
-      col.classList.add('playing');
-      const target = col.offsetLeft - this.scroller.clientWidth / 2 + col.clientWidth / 2;
+    const cur = c >= 0 ? this.cols[c] : null;
+    if (cur) {
+      cur.classList.add('playing');
+      if (cur._block) cur._block.classList.add('playing');
+      const anchor = cur._block || cur;
+      const target = anchor.offsetLeft - this.scroller.clientWidth / 2 + anchor.clientWidth / 2;
       this.scroller.scrollLeft = Math.max(0, target);
     }
   }
