@@ -249,11 +249,19 @@
   document.getElementById('chord-intro').appendChild(introEm);
   new GuitarChords.ChordDiagram(introEm, 'Em');
 
-  for (const name of ['Em', 'Am', 'D']) {
-    const holder = document.createElement('div');
-    document.getElementById('chord-first-three').appendChild(holder);
-    new GuitarChords.ChordDiagram(holder, name);
+  function fillChordRow(containerId, names) {
+    const row = document.getElementById(containerId);
+    for (const name of names) {
+      const holder = document.createElement('div');
+      row.appendChild(holder);
+      new GuitarChords.ChordDiagram(holder, name);
+    }
   }
+  fillChordRow('chord-first-three', ['Em', 'Am', 'D']);
+  // the complete quiz pool, grouped as families
+  fillChordRow('chord-family-twins', ['E', 'Em', 'A', 'Am', 'D', 'Dm']);
+  fillChordRow('chord-family-camp', ['C', 'G']);
+  fillChordRow('chord-family-seven', ['E7', 'A7']);
   makePlayer('#player-chord-demo', TabData.chordDemo, { showLoop: false, showMetronome: false });
 
   /* ── chords lesson 2 : name that chord ─────────────────────── */

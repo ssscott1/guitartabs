@@ -13,6 +13,8 @@ const GuitarChords = (() => {
     Dm: { frets: [1, 3, 2, 0, null, null], fingers: [1, 3, 2, null, null, null] },
     C:  { frets: [0, 1, 0, 2, 3, null],    fingers: [null, 1, null, 2, 3, null] },
     G:  { frets: [3, 0, 0, 0, 2, 3],       fingers: [3, null, null, null, 1, 2] },
+    E7: { frets: [0, 0, 1, 0, 2, 0],       fingers: [null, null, 1, null, 2, null] },
+    A7: { frets: [0, 2, 0, 2, 0, null],    fingers: [null, 3, null, 2, null, null] },
   };
   const NAMES = Object.keys(CHORDS);
 

@@ -150,6 +150,7 @@ main { max-width: 980px; margin: 0 auto; padding: 0 18px 60px; }
   box-shadow: var(--shadow);
 }
 .card h2 { margin: 0 0 8px; font-size: 1.2rem; }
+.card h3 { margin: 22px 0 4px; font-size: 1.02rem; color: var(--amber); }
 .card p { color: var(--ink-dim); }
 .card strong, .card em { color: var(--ink); }
 

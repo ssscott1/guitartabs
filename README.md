@@ -30,8 +30,8 @@ and it works as-is.
 
 | # | Tabs track | Chords track |
 | --- | --- | --- |
-| 1 | **Read Tabs** — the six lines and numbers, clickable fretboard, playable examples | **Read Chords** — chord-chart anatomy, tap-to-strum chord cards |
-| 2 | **Note Quiz** — see a note in tab, find it on the fretboard (8/10 to pass) | **Chord Quiz** — see a chart, name the chord (8/10 to pass) |
+| 1 | **Read Tabs** — the six lines and numbers, clickable fretboard, playable examples | **Read Chords** — chord-chart anatomy plus all 10 beginner chords as tap-to-strum cards, grouped in families |
+| 2 | **Note Quiz** — see a note in tab, find it on the fretboard (8/10 to pass) | **Chord Quiz** — see a chart, name the chord from the Lesson 1 toolbox (8/10 to pass) |
 | 3 | **First Riffs** — three looping riffs with tempo control | **First Changes** — Em↔Am, Am↔C, G↔D drills with anchor-finger tips |
 | 4 | **Link It Up** — join riff A to riff B + Speed Trainer (+5%/loop) | **Progressions** — build G–Em–C–D + Speed Trainer |
 | 5 | **Play Songs** — five melodies with tap-along scoring and stars | **Strum Songs** — five chord songs, names above the tab, strum-along scoring |
