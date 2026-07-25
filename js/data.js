@@ -188,10 +188,73 @@ const TabData = (() => {
     ]),
   };
 
+  /* ── Chords track: progressions built from chord shapes ──────
+   * One downstrum per beat; a labels row shows the chord names. */
+
+  function prog(steps) { // steps: [chordName, beats]
+    const notes = [];
+    const labels = [];
+    let t = 0;
+    for (const [name, beats] of steps) {
+      labels.push({ t, name });
+      const frets = GuitarChords.CHORDS[name].frets;
+      for (let b = 0; b < beats; b++) {
+        for (let s = 0; s < 6; s++) {
+          if (frets[s] != null) notes.push({ s, f: frets[s], t: t + b, d: 1 });
+        }
+      }
+      t += beats;
+    }
+    return { notes, labels };
+  }
+
+  function chordSong(id, title, tempo, beatsPerBar, difficulty, blurb, steps) {
+    return { id, title, tempo, beatsPerBar, res: 1, difficulty, blurb, ...prog(steps) };
+  }
+
+  const chordDemo = chordSong('cdemo', 'Em to Am', 70, 4, 1, '',
+    [['Em', 4], ['Am', 4]]);
+
+  const chordDrills = {
+    emAm: chordSong('emAm', 'Em ↔ Am', 80, 4, 1, '', [['Em', 4], ['Am', 4]]),
+    amC: chordSong('amC', 'Am ↔ C', 80, 4, 1, '', [['Am', 4], ['C', 4]]),
+    gD: chordSong('gD', 'G ↔ D', 80, 4, 1, '', [['G', 4], ['D', 4]]),
+    gEm: chordSong('gEm', 'G → Em', 85, 4, 1, '', [['G', 4], ['Em', 4]]),
+    cD: chordSong('cD', 'C → D', 85, 4, 1, '', [['C', 4], ['D', 4]]),
+    magic: chordSong('magic', 'G → Em → C → D', 85, 4, 2, '',
+      [['G', 4], ['Em', 4], ['C', 4], ['D', 4]]),
+  };
+
+  const chordSongs = [
+    chordSong('c-twinkle', 'Twinkle Twinkle (strum-along)', 90, 4, 1,
+      'Three chords, one strum per beat. Sing the melody over the top — that\'s how most guitarists actually play songs!',
+      [['G', 4], ['C', 2], ['G', 2], ['C', 2], ['G', 2], ['D', 2], ['G', 2],
+       ['G', 2], ['D', 2], ['G', 2], ['D', 2], ['G', 2], ['D', 2], ['G', 2], ['D', 2],
+       ['G', 4], ['C', 2], ['G', 2], ['C', 2], ['G', 2], ['D', 2], ['G', 2]]),
+    chordSong('c-blues', '12-Bar Blues in A', 100, 4, 1,
+      'The most important progression in music: 12 bars of A, D and E. Long stretches on each chord = time to breathe.',
+      [['A', 16], ['D', 8], ['A', 8], ['E', 4], ['D', 4], ['A', 4], ['E', 4]]),
+    chordSong('c-magic', 'The Magic Four (pop progression)', 95, 4, 2,
+      'G–Em–C–D: the “50s progression” behind hundreds of pop hits. Loop it four times and you\'ve basically played them all.',
+      [['G', 4], ['Em', 4], ['C', 4], ['D', 4],
+       ['G', 4], ['Em', 4], ['C', 4], ['D', 4],
+       ['G', 4], ['Em', 4], ['C', 4], ['D', 4],
+       ['G', 4], ['Em', 4], ['C', 4], ['D', 4]]),
+    chordSong('c-scarborough', 'Scarborough Fair (folk waltz)', 100, 3, 2,
+      'A traditional folk tune in 3/4 (simplified) — count “1-2-3” and change chords on the 1.',
+      [['Em', 3], ['Em', 3], ['D', 3], ['Em', 3], ['G', 3], ['D', 3], ['Em', 3], ['A', 3],
+       ['Em', 3], ['D', 3], ['G', 3], ['A', 3], ['Em', 3], ['Em', 3]]),
+    chordSong('c-risingsun', 'House of the Rising Sun (simplified)', 110, 3, 3,
+      'The brooding folk classic (simplified to skip the tricky F chord). Minor chords = instant atmosphere.',
+      [['Am', 3], ['C', 3], ['D', 3], ['E', 3], ['Am', 3], ['C', 3], ['E', 3], ['E', 3],
+       ['Am', 3], ['C', 3], ['D', 3], ['E', 3], ['Am', 3], ['E', 3], ['Am', 3], ['Am', 3]]),
+  ];
+
   return {
     demos: { demo1, demo2 },
     riffs: { riff1, riff2, riff3 },
     links: { linkA, linkB, linkAB },
     songs: [twinkle, odeToJoy, saints, blues, greensleeves],
+    chordDemo, chordDrills, chordSongs,
   };
 })();

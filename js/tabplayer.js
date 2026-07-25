@@ -66,9 +66,17 @@ class TabPlayer {
     const bpb = this.song.beatsPerBar;
     const nCols = Math.round(this.totalBeats / res);
 
+    // optional chord-name labels row (used by the Chords track)
+    this.hasLabels = !!(this.song.labels && this.song.labels.length);
+    const labelAt = new Map();
+    if (this.hasLabels) {
+      for (const l of this.song.labels) labelAt.set(Math.round(l.t / res), l.name);
+    }
+
     // legend column: beat header + string names
     const legend = document.createElement('div');
     legend.className = 'tab-col tab-legend';
+    if (this.hasLabels) legend.appendChild(this._cell('tab-chordname', ''));
     legend.appendChild(this._cell('tab-beat', ''));
     for (const name of GuitarAudio.STRING_NAMES) legend.appendChild(this._cell('tab-cell tab-name', name));
     grid.appendChild(legend);
@@ -87,6 +95,7 @@ class TabPlayer {
       const beat = c * res;
       const col = document.createElement('div');
       col.className = 'tab-col';
+      if (this.hasLabels) col.appendChild(this._cell('tab-chordname', labelAt.get(c) || ''));
       const beatCell = this._cell('tab-beat', Number.isInteger(beat) ? String((beat % bpb) + 1) : '');
       if (beat % bpb === 0) beatCell.classList.add('tab-beat-one');
       col.appendChild(beatCell);
@@ -121,6 +130,7 @@ class TabPlayer {
   _barline() {
     const col = document.createElement('div');
     col.className = 'tab-col tab-bar';
+    if (this.hasLabels) col.appendChild(this._cell('tab-chordname', ''));
     col.appendChild(this._cell('tab-beat', ''));
     for (let s = 0; s < 6; s++) col.appendChild(this._cell('tab-cell', '|'));
     return col;
@@ -223,9 +233,9 @@ class TabPlayer {
     }
     // the notes themselves (listen mode only — in play-along, YOU play them)
     if (!this.playAlong) {
-      for (const n of this.song.notes) {
-        const accent = Number.isInteger(n.t / bpb) ? 1 : 0.85;
-        this._sources.push(GuitarAudio.pluck(n.s, n.f, this.noteStart + n.t * spb, accent, this.bus));
+      for (const g of this.groups) {
+        const accent = Number.isInteger(g.t / bpb) ? 1 : 0.85;
+        this._strumGroup(g, this.noteStart + g.t * spb, accent);
       }
     } else {
       // reset scoring state
@@ -320,7 +330,7 @@ class TabPlayer {
     if (!best) return;
 
     // always make sound — tapping should feel musical even when late
-    for (const n of best.notes) GuitarAudio.pluck(n.s, n.f, 0, 0.9, this.bus);
+    this._strumGroup(best, 0, 0.9);
 
     if (best.judged) return { grade: 'again' };
     const deltaSec = Math.abs(best.t - beat) * this.spb;
@@ -354,6 +364,17 @@ class TabPlayer {
       }
       this._missPtr++;
     }
+  }
+
+  /* Play a note group. Single notes pluck; chords get a low-to-high
+   * strum stagger so they sound like a real downstrum. */
+  _strumGroup(group, when, vel) {
+    const base = Math.max(when, GuitarAudio.ctx.currentTime);
+    const sorted = [...group.notes].sort((a, b) => b.s - a.s);
+    sorted.forEach((n, i) => {
+      this._sources.push(
+        GuitarAudio.pluck(n.s, n.f, base + i * 0.014, Math.max(0.3, vel - i * 0.03), this.bus));
+    });
   }
 
   _markGroup(group, grade) {

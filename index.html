@@ -11,7 +11,11 @@
 <body>
 
 <header class="site-header">
-  <div class="logo">🎸 <span>Easy Guitar <em>Tabs</em></span></div>
+  <div class="logo">🎸 <span>Easy Guitar</span>
+    <span class="mode-switch" id="mode-switch" title="Choose what to learn">
+      <button data-mode="tabs" class="active">Tabs</button><span class="mode-slash">/</span><button data-mode="chords">Chords</button>
+    </span>
+  </div>
   <div class="header-right">
     <div class="progress-pips" id="progress-pips" title="Your lesson progress"></div>
     <button id="theme-toggle" class="theme-toggle" title="Switch to light mode" aria-label="Toggle light/dark mode">☀️</button>
@@ -208,6 +212,182 @@ E |—————————|     play them one at a time</pre>
     </div>
   </section>
 
+  <!-- ╔════════════════ CHORDS TRACK ════════════════╗ -->
+
+  <!-- ══════════════ CHORDS LESSON 1 : READING CHORD CHARTS ══════════════ -->
+  <section class="lesson" id="lesson-c1" hidden>
+    <h1>📖 Lesson 1 — How to Read a Chord Chart</h1>
+    <p class="lead">A <strong>chord</strong> is several notes played at once — the full, rich sound behind
+    every song you've ever sung along to. Chord charts show you exactly where your fingers go.</p>
+
+    <div class="card">
+      <h2>The chart is a photo of your fretboard</h2>
+      <p>Imagine standing your guitar upright and looking at the front of the neck — that's a chord chart.
+      <strong>Heads up: it's turned 90° from tab!</strong></p>
+      <ul class="explain-list">
+        <li>🪵 <strong>Vertical lines</strong> are strings — thickest (low&nbsp;E) on the <em>left</em>, thinnest (high&nbsp;e) on the right</li>
+        <li>➖ <strong>Horizontal lines</strong> are frets; the thick bar at the top is the nut</li>
+        <li>🟡 <strong>Dots</strong> show where to press. The number inside is <em>which finger</em>:
+            1&nbsp;=&nbsp;index, 2&nbsp;=&nbsp;middle, 3&nbsp;=&nbsp;ring, 4&nbsp;=&nbsp;pinky
+            <em>(unlike tab, where numbers mean frets!)</em></li>
+        <li>○ above a string = play it <strong>open</strong> &nbsp;·&nbsp; ✕ = <strong>don't play</strong> that string</li>
+      </ul>
+      <p>👇 <strong>Try it!</strong> This is E&nbsp;minor — the easiest chord on the guitar, and it sounds
+      moody and huge. Tap the chart to strum it.</p>
+      <div class="chord-row" id="chord-intro"></div>
+    </div>
+
+    <div class="card">
+      <h2>Meet your first three chords</h2>
+      <p>These three shapes already unlock real songs. Strum each one and listen to its character:
+      <strong>minor</strong> chords (Em, Am) sound moody, <strong>major</strong> chords (D) sound bright and happy.</p>
+      <div class="chord-row" id="chord-first-three"></div>
+      <p>💡 Press your fingertips down just behind the fret wire, and keep them curled so they don't
+      touch the neighbouring strings.</p>
+    </div>
+
+    <div class="card">
+      <h2>Chords in tab = stacked numbers</h2>
+      <p>Remember from the Tabs track: stacked numbers are played together. That's exactly what a strummed
+      chord looks like in tab — and here the chord names ride along on top. Press play:</p>
+      <div id="player-chord-demo"></div>
+    </div>
+
+    <div class="done-row">
+      <button class="btn btn-done" data-complete="c1">✓ Got it — I can read a chord chart!</button>
+    </div>
+  </section>
+
+  <!-- ══════════════ CHORDS LESSON 2 : CHORD QUIZ ══════════════ -->
+  <section class="lesson" id="lesson-c2" hidden>
+    <h1>🎯 Lesson 2 — Name That Chord!</h1>
+    <p class="lead">We show you a chord chart — you name it. Tap the chart to <em>hear</em> the chord for a
+    clue (minor = moody, major = bright). Get <strong>8 out of 10</strong> to pass.</p>
+
+    <div class="card quiz-card">
+      <div class="quiz-status">
+        <span id="cquiz-round">Ready?</span>
+        <span id="cquiz-score"></span>
+        <span id="cquiz-best"></span>
+      </div>
+      <div class="cquiz-stage">
+        <div id="cquiz-diagram"></div>
+        <div class="cquiz-side">
+          <p id="cquiz-instruction">Press <strong>Start</strong> and pick the right name for each chart.</p>
+          <div id="cquiz-options" class="cquiz-options"></div>
+          <div id="cquiz-feedback" class="quiz-feedback"></div>
+        </div>
+      </div>
+      <div class="quiz-controls">
+        <button class="btn btn-primary" id="cquiz-start">▶ Start Quiz</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════ CHORDS LESSON 3 : FIRST CHANGES ══════════════ -->
+  <section class="lesson" id="lesson-c3" hidden>
+    <h1>🤘 Lesson 3 — Your First Chord Changes</h1>
+    <p class="lead">Playing one chord is easy. <strong>Changing</strong> between chords without stopping —
+    that's the real skill. Loop these pairs slowly and keep the strums even, even if a change squeaks.</p>
+
+    <div class="card">
+      <h2>Change 1 · Em ↔ Am <span class="tag">the shape shifter</span></h2>
+      <p>Your two fingers keep the exact same shape — they just hop over one string set, and your index
+      finger joins in for Am. Watch the chord names above the tab as it plays.</p>
+      <div class="chord-row chord-row-mini" id="chords-emAm"></div>
+      <div id="player-emAm"></div>
+    </div>
+
+    <div class="card">
+      <h2>Change 2 · Am ↔ C <span class="tag">one finger moves</span></h2>
+      <p>The secret handshake of guitar: between Am and C, fingers 1 and 2 <strong>stay put</strong>.
+      Only your ring finger moves. Keep the anchored fingers pressed down the whole time.</p>
+      <div class="chord-row chord-row-mini" id="chords-amC"></div>
+      <div id="player-amC"></div>
+    </div>
+
+    <div class="card">
+      <h2>Change 3 · G ↔ D <span class="tag">the campfire change</span></h2>
+      <p>The most-played chord change in history. It's a bigger jump, so start extra slow —
+      aim your ring finger first and let the others fall in around it.</p>
+      <div class="chord-row chord-row-mini" id="chords-gD"></div>
+      <div id="player-gD"></div>
+    </div>
+
+    <div class="done-row">
+      <button class="btn btn-done" data-complete="c3">✓ I can change chords!</button>
+    </div>
+  </section>
+
+  <!-- ══════════════ CHORDS LESSON 4 : PROGRESSIONS ══════════════ -->
+  <section class="lesson" id="lesson-c4" hidden>
+    <h1>🔗 Lesson 4 — Build a Progression</h1>
+    <p class="lead">A <strong>progression</strong> is a repeating loop of chords — the engine of a song.
+    The trick to smooth progressions: start moving to the next chord <em>on the last strum</em> of the
+    current one. The beat never waits for you!</p>
+
+    <div class="card">
+      <h2>Step 1 · G → Em, on its own</h2>
+      <div id="player-gEm"></div>
+    </div>
+    <div class="card">
+      <h2>Step 2 · C → D, on its own</h2>
+      <div id="player-cD"></div>
+    </div>
+    <div class="card">
+      <h2>Step 3 · The Magic Four: G → Em → C → D</h2>
+      <p>Chain both changes into the famous “50s progression” — the loop behind hundreds of pop songs.
+      Turn on <strong>Loop</strong> and go around until the seams disappear.</p>
+      <div id="player-magic"></div>
+      <div class="trainer-row">
+        <label class="switch-label">
+          <input type="checkbox" id="c-speed-trainer">
+          <span>🚀 <strong>Speed Trainer</strong> — each time the loop repeats, tempo climbs +5% (up to 120%). How far can you keep up?</span>
+        </label>
+      </div>
+    </div>
+
+    <div class="done-row">
+      <button class="btn btn-done" data-complete="c4">✓ I can play a progression!</button>
+    </div>
+  </section>
+
+  <!-- ══════════════ CHORDS LESSON 5 : STRUM SONGS ══════════════ -->
+  <section class="lesson" id="lesson-c5" hidden>
+    <h1>🎵 Lesson 5 — Strum Real Songs</h1>
+    <p class="lead">Full songs, chords only: the names ride above the tab, one strum per beat.
+    Use <strong>Listen</strong> to hear it, then flip on <strong>🎮 Play-Along</strong> and tap
+    <kbd>Space</kbd> (or the big pad) on every strum. You get a count-in.</p>
+
+    <div class="song-picker" id="c-song-picker"></div>
+
+    <div class="card">
+      <div class="song-header">
+        <h2 id="c-song-title"></h2>
+        <div class="song-stars" id="c-song-stars" title="Your best play-along score"></div>
+      </div>
+      <p id="c-song-blurb" class="song-blurb"></p>
+      <div id="c-player-song"></div>
+
+      <div class="playalong-row">
+        <label class="switch-label">
+          <input type="checkbox" id="c-playalong-toggle">
+          <span>🎮 <strong>Play-Along Mode</strong> — you strum, we keep the beat</span>
+        </label>
+      </div>
+
+      <div id="c-playalong-ui" hidden>
+        <div class="pa-hud">
+          <div class="pa-stat"><span id="c-pa-combo">0</span><label>combo</label></div>
+          <div class="pa-msg" id="c-pa-msg">Press play, wait for the count-in…</div>
+          <div class="pa-stat"><span id="c-pa-score">0</span><label>points</label></div>
+        </div>
+        <button id="c-tap-pad" class="tap-pad">STRUM<small>or press Space</small></button>
+      </div>
+      <div id="c-pa-results" class="pa-results" hidden></div>
+    </div>
+  </section>
+
 </main>
 
 <footer class="site-footer">
@@ -216,6 +396,7 @@ E |—————————|     play them one at a time</pre>
 </footer>
 
 <script src="js/audio.js"></script>
+<script src="js/chords.js"></script>
 <script src="js/data.js"></script>
 <script src="js/fretboard.js"></script>
 <script src="js/tabplayer.js"></script>

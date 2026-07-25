@@ -1,8 +1,13 @@
-# 🎸 Easy Guitar Tabs — Learn Guitar Tabs the Fun Way
+# 🎸 Easy Guitar Tabs/Chords — Learn Guitar the Fun Way
 
-An interactive, beginner-friendly website that teaches you to **read guitar
-tablature**, **link riffs together**, and **play real songs in time** — with a
-built-in tap-along rhythm game to test your timing.
+An interactive, beginner-friendly website with **two learning tracks** —
+switch between them right in the title:
+
+- **Tabs**: read guitar tablature, link riffs together, and play melodies in time
+- **Chords**: read chord charts, master chord changes, and strum real songs
+
+Both tracks follow the same five-lesson arc and end in a tap-along rhythm
+game that scores your timing.
 
 No frameworks, no build step, no audio files: every note is synthesized live
 in the browser with the Web Audio API (Karplus–Strong plucked-string synthesis),
@@ -21,21 +26,22 @@ python3 -m http.server 8000
 Or enable **GitHub Pages** on this repo (Settings → Pages → deploy from branch)
 and it works as-is.
 
-## The five lessons
+## The five lessons (× two tracks)
 
-1. **Read Tabs** — what the six lines and the numbers mean, with a clickable
-   virtual fretboard and playable example tabs.
-2. **Note Quiz** — a 10-question game: see a note in tab, find it on the
-   fretboard. Score 8/10 to pass.
-3. **First Riffs** — three short riffs (one-string rock, E-minor pentatonic,
-   blues boogie) with looping playback and a tempo slider.
-4. **Link It Up** — practice joining riff A to riff B without dropping the
-   beat, plus a **Speed Trainer** that nudges the tempo up 5% every loop.
-5. **Play Songs** — five traditional/public-domain songs with scrolling tab
-   playback, a metronome, and **Play-Along Mode**: tap Space (or the big pad)
-   in time with the notes and earn up to three stars per song.
+| # | Tabs track | Chords track |
+| --- | --- | --- |
+| 1 | **Read Tabs** — the six lines and numbers, clickable fretboard, playable examples | **Read Chords** — chord-chart anatomy, tap-to-strum chord cards |
+| 2 | **Note Quiz** — see a note in tab, find it on the fretboard (8/10 to pass) | **Chord Quiz** — see a chart, name the chord (8/10 to pass) |
+| 3 | **First Riffs** — three looping riffs with tempo control | **First Changes** — Em↔Am, Am↔C, G↔D drills with anchor-finger tips |
+| 4 | **Link It Up** — join riff A to riff B + Speed Trainer (+5%/loop) | **Progressions** — build G–Em–C–D + Speed Trainer |
+| 5 | **Play Songs** — five melodies with tap-along scoring and stars | **Strum Songs** — five chord songs, names above the tab, strum-along scoring |
 
-Progress (completed lessons, quiz best, song stars) is saved in
+All playback runs through the same engine: scrolling highlight, tempo
+slider, loop, metronome, count-in, and **Play-Along Mode** (tap Space or the
+big pad in time; graded perfect/good/miss; up to three stars per song).
+Chords are strummed with a low-to-high stagger so they sound real.
+
+Progress (completed lessons per track, quiz bests, song stars) is saved in
 `localStorage`. The site has light and dark modes — it follows your system
 preference on first visit, and the ☀️/🌙 button in the header (also
 remembered in `localStorage`) overrides it.
@@ -44,13 +50,14 @@ remembered in `localStorage`) overrides it.
 
 | File | What it does |
 | --- | --- |
-| `index.html` | All five lesson pages (single-page app) |
+| `index.html` | All ten lesson pages, both tracks (single-page app) |
 | `css/style.css` | The whole look |
 | `js/audio.js` | Guitar synth + metronome (Web Audio API) |
-| `js/data.js` | Every riff and song, written as tab data |
+| `js/chords.js` | Chord shapes, strum helper, clickable chord-chart component |
+| `js/data.js` | Every riff, song, and chord progression, written as tab data |
 | `js/tabplayer.js` | Tab renderer, playback engine, play-along scoring |
 | `js/fretboard.js` | The clickable fretboard component |
-| `js/main.js` | Lesson navigation, quiz, trainer, game wiring, progress |
+| `js/main.js` | Track/lesson navigation, quizzes, trainers, game wiring, progress |
 
 ## Adding a song
 
