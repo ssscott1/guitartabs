@@ -1,4 +1,4 @@
-# 🎸 TabHero — Learn Guitar Tabs the Fun Way
+# 🎸 Easy Guitar Tabs — Learn Guitar Tabs the Fun Way
 
 An interactive, beginner-friendly website that teaches you to **read guitar
 tablature**, **link riffs together**, and **play real songs in time** — with a
@@ -36,7 +36,9 @@ and it works as-is.
    in time with the notes and earn up to three stars per song.
 
 Progress (completed lessons, quiz best, song stars) is saved in
-`localStorage`.
+`localStorage`. The site has light and dark modes — it follows your system
+preference on first visit, and the ☀️/🌙 button in the header (also
+remembered in `localStorage`) overrides it.
 
 ## Code layout
 

@@ -2,8 +2,29 @@
  * play-along game, and progress saved to localStorage. */
 
 (() => {
+  /* ── light / dark theme ────────────────────────────────────── */
+  const THEME_KEY = 'easy-guitar-tabs-theme';
+  const themeBtn = document.getElementById('theme-toggle');
+
+  function applyTheme(theme) {
+    document.documentElement.dataset.theme = theme;
+    const dark = theme === 'dark';
+    themeBtn.textContent = dark ? '☀️' : '🌙';
+    themeBtn.title = dark ? 'Switch to light mode' : 'Switch to dark mode';
+  }
+
+  const storedTheme = localStorage.getItem(THEME_KEY);
+  applyTheme(storedTheme
+    || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'));
+
+  themeBtn.addEventListener('click', () => {
+    const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+    applyTheme(next);
+    localStorage.setItem(THEME_KEY, next);
+  });
+
   /* ── progress store ────────────────────────────────────────── */
-  const STORE_KEY = 'tabhero-progress-v1';
+  const STORE_KEY = 'easy-guitar-tabs-progress-v1';
   const progress = (() => {
     try { return JSON.parse(localStorage.getItem(STORE_KEY)) || {}; }
     catch (e) { return {}; }
@@ -302,5 +323,5 @@
   showLesson(1);
 
   // handy for debugging / automated tests
-  window.TabHero = { players: allPlayers, songPlayer, progress };
+  window.EasyGuitarTabs = { players: allPlayers, songPlayer, progress };
 })();
