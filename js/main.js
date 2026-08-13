@@ -47,7 +47,7 @@
   const MODE_KEY = 'easy-guitar-tabs-mode';
   const NAV_LABELS = {
     tabs: ['Read Tabs', 'Note Quiz', 'First Riffs', 'Link It Up', 'Play Songs'],
-    chords: ['Read Chords', 'Chord Quiz', 'First Changes', 'Progressions', 'Strum Songs', 'Power Chords'],
+    chords: ['Read Chords', 'Chord Quiz', 'First Changes', 'Progressions', 'Strum Songs', 'Barre Chords'],
   };
   let currentMode = 'tabs';
   let currentLessonNum = 1;
@@ -64,7 +64,7 @@
       const b = document.createElement('button');
       b.dataset.lesson = i + 1;
       const isBonus = mode === 'chords' && i === 5;
-      b.innerHTML = `<span class="step">${isBonus ? '⚡' : i + 1}</span> ${label}`;
+      b.innerHTML = `<span class="step">${isBonus ? '💪' : i + 1}</span> ${label}`;
       nav.appendChild(b);
     });
     navBtns = [...nav.querySelectorAll('button')];
@@ -398,11 +398,11 @@
     loop: true, metronome: true, view: 'chords',
   }));
 
-  /* ── chords lesson 6 : power chords (bonus) ────────────────── */
-  fillChordRow('power-open', ['E5', 'A5', 'D5']);
-  fillChordRow('power-movable-e', ['F5', 'G5']);
-  fillChordRow('power-movable-a', ['B5', 'C5']);
-  makePlayer('#player-power', TabData.powerDemo, { loop: true, metronome: true, view: 'chords' });
+  /* ── chords lesson 6 : barre chords (bonus) ────────────────── */
+  fillChordRow('barre-intro', ['F']);
+  fillChordRow('barre-e-shape', ['F', 'G_barre', 'F#m']);
+  fillChordRow('barre-a-shape', ['B', 'Bm', 'C#m']);
+  makePlayer('#player-barre', TabData.barreDemo, { loop: true, metronome: true, view: 'chords' });
 
   /* ══════════════ SONG LESSONS (shared by both tracks) ══════════════ */
 

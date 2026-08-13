@@ -225,8 +225,8 @@ const TabData = (() => {
       [['G', 4], ['Em', 4], ['C', 4], ['D', 4]]),
   };
 
-  const powerDemo = chordSong('power', 'E5 → G5 → A5', 90, 4, 2, '',
-    [['E5', 4], ['G5', 2], ['A5', 2], ['E5', 4], ['G5', 2], ['D5', 2]]);
+  const barreDemo = chordSong('barre', 'Bm → G → D → A', 90, 4, 2, '',
+    [['Bm', 4], ['G', 4], ['D', 4], ['A', 4]]);
 
   const chordSongs = [
     chordSong('c-twinkle', 'Twinkle Twinkle (strum-along)', 90, 4, 1,
@@ -258,6 +258,6 @@ const TabData = (() => {
     riffs: { riff1, riff2, riff3 },
     links: { linkA, linkB, linkAB },
     songs: [twinkle, odeToJoy, saints, blues, greensleeves],
-    chordDemo, chordDrills, chordSongs, powerDemo,
+    chordDemo, chordDrills, chordSongs, barreDemo,
   };
 })();

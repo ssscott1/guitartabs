@@ -18,20 +18,28 @@ const GuitarChords = (() => {
   };
   const NAMES = Object.keys(CHORDS); // the Lesson 1 / quiz pool
 
-  /* Power chords ("5" chords) — root + fifth (+ octave). Kept separate
-   * from the quiz pool. base > 1 means the chart starts at that fret. */
-  const POWER = {
-    E5: { frets: [null, null, null, 2, 2, 0], fingers: [null, null, null, 2, 1, null] },
-    A5: { frets: [null, null, 2, 2, 0, null], fingers: [null, null, 2, 1, null, null] },
-    D5: { frets: [null, 3, 2, 0, null, null], fingers: [null, 3, 1, null, null, null] },
-    F5: { frets: [null, null, null, 3, 3, 1], fingers: [null, null, null, 4, 3, 1] },
-    G5: { frets: [null, null, null, 5, 5, 3], fingers: [null, null, null, 4, 3, 1], base: 3 },
-    B5: { frets: [null, null, 4, 4, 2, null], fingers: [null, null, 4, 3, 1, null], base: 2 },
-    C5: { frets: [null, null, 5, 5, 3, null], fingers: [null, null, 4, 3, 1, null], base: 3 },
+  /* Barre chords — the index finger flattens across the strings (drawn
+   * as a capsule: barres[{fret, from, to, finger}], string indices
+   * from = lowest string, to = highest). Kept separate from the quiz
+   * pool. base > 1 means the chart starts at that fret. The set below
+   * is the rock staples: E-shape F/G/F#m and A-shape B/Bm/C#m. */
+  const BARRE = {
+    'F':   { frets: [1, 1, 2, 3, 3, 1], fingers: [null, null, 2, 4, 3, null],
+             barres: [{ fret: 1, from: 5, to: 0, finger: 1 }] },
+    'G_barre': { label: 'G', frets: [3, 3, 4, 5, 5, 3], fingers: [null, null, 2, 4, 3, null],
+             barres: [{ fret: 3, from: 5, to: 0, finger: 1 }], base: 3 },
+    'F#m': { frets: [2, 2, 2, 4, 4, 2], fingers: [null, null, null, 4, 3, null],
+             barres: [{ fret: 2, from: 5, to: 0, finger: 1 }] },
+    'B':   { frets: [2, 4, 4, 4, 2, null], fingers: [null, null, null, null, null, null],
+             barres: [{ fret: 2, from: 4, to: 0, finger: 1 }, { fret: 4, from: 3, to: 1, finger: 3 }] },
+    'Bm':  { frets: [2, 3, 4, 4, 2, null], fingers: [null, 2, 4, 3, null, null],
+             barres: [{ fret: 2, from: 4, to: 0, finger: 1 }] },
+    'C#m': { frets: [4, 5, 6, 6, 4, null], fingers: [null, 2, 4, 3, null, null],
+             barres: [{ fret: 4, from: 4, to: 0, finger: 1 }], base: 4 },
   };
-  const POWER_NAMES = Object.keys(POWER);
+  const BARRE_NAMES = Object.keys(BARRE);
 
-  function shapeOf(name) { return CHORDS[name] || POWER[name]; }
+  function shapeOf(name) { return CHORDS[name] || BARRE[name]; }
 
   /* Strum a chord: pluck each sounding string low-to-high with a small
    * stagger, like a real downstrum. */
@@ -70,8 +78,9 @@ const GuitarChords = (() => {
       const bottomY = nutY + 4 * rowH;
       const xFor = s => 24 + (5 - s) * 24; // low E leftmost
 
-      let svg = `<svg class="cd" viewBox="0 0 168 ${bottomY + 10}" role="img" aria-label="${this.name} chord chart">`;
-      if (showName) svg += `<text class="cd-name" x="84" y="20" text-anchor="middle">${this.name}</text>`;
+      const display = chord.label || this.name;
+      let svg = `<svg class="cd" viewBox="0 0 184 ${bottomY + 10}" role="img" aria-label="${display} chord chart">`;
+      if (showName) svg += `<text class="cd-name" x="84" y="20" text-anchor="middle">${display}</text>`;
 
       // open / muted markers above the nut
       for (let s = 0; s < 6; s++) {
@@ -85,7 +94,7 @@ const GuitarChords = (() => {
         svg += `<rect class="cd-nut" x="22" y="${nutY - 4}" width="124" height="5" rx="2"/>`;
       } else {
         svg += `<line class="cd-fret" x1="24" y1="${nutY}" x2="144" y2="${nutY}"/>`;
-        svg += `<text class="cd-base" x="148" y="${nutY + rowH / 2 + 4}">${base}fr</text>`;
+        svg += `<text class="cd-base" x="160" y="${nutY + rowH / 2 + 4}">${base}fr</text>`;
       }
       for (let i = 1; i <= 4; i++) {
         svg += `<line class="cd-fret" x1="24" y1="${nutY + i * rowH}" x2="144" y2="${nutY + i * rowH}"/>`;
@@ -94,10 +103,22 @@ const GuitarChords = (() => {
         svg += `<line class="cd-string" x1="${xFor(s)}" y1="${nutY}" x2="${xFor(s)}" y2="${bottomY}" stroke-width="${1 + (s * 0.35)}"/>`;
       }
 
+      // barres: one capsule across the strings the finger flattens
+      const barres = chord.barres || [];
+      for (const b of barres) {
+        const cy = nutY + (b.fret - base + 0.5) * rowH;
+        const xL = xFor(b.from);
+        const xR = xFor(b.to);
+        svg += `<rect class="cd-dot" x="${xL - 10.5}" y="${cy - 10.5}" width="${xR - xL + 21}" height="21" rx="10.5"/>`;
+        if (b.finger) svg += `<text class="cd-finger" x="${xL}" y="${cy + 4.5}" text-anchor="middle">${b.finger}</text>`;
+      }
+      const coveredByBarre = (s, f) =>
+        barres.some(b => b.fret === f && s <= b.from && s >= b.to);
+
       // finger dots
       for (let s = 0; s < 6; s++) {
         const f = chord.frets[s];
-        if (!f) continue;
+        if (!f || coveredByBarre(s, f)) continue;
         const cy = nutY + (f - base + 0.5) * rowH;
         svg += `<circle class="cd-dot" cx="${xFor(s)}" cy="${cy}" r="10.5"/>`;
         const finger = chord.fingers[s];
@@ -117,5 +138,5 @@ const GuitarChords = (() => {
     }
   }
 
-  return { CHORDS, NAMES, POWER, POWER_NAMES, shapeOf, strum, ChordDiagram };
+  return { CHORDS, NAMES, BARRE, BARRE_NAMES, shapeOf, strum, ChordDiagram };
 })();

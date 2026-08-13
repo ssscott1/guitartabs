@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Power Chord Chart — Easy Guitar Tabs/Chords</title>
-  <meta name="description" content="Power chord shapes and the full root-note map on one printable page.">
+  <title>Barre Chord Chart — Easy Guitar Tabs/Chords</title>
+  <meta name="description" content="The rock barre chord shapes and the full root-note map on one printable page.">
   <link rel="stylesheet" href="css/style.css">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💪</text></svg>">
   <style>
     /* Page-specific: a clean, print-friendly reference sheet. */
     body { background-image: none; }
@@ -57,7 +57,7 @@
 <body>
 <div class="print-wrap">
   <header class="print-header">
-    <h1>⚡ Easy Guitar — <em>Power Chords</em></h1>
+    <h1>💪 Easy Guitar — <em>Barre Chords for Rock</em></h1>
     <div class="print-actions no-print">
       <button class="btn btn-primary" onclick="window.print()">🖨️ Print this page</button>
       <a class="btn btn-ghost" href="chords.html">🎸 Beginner chords</a>
@@ -66,36 +66,38 @@
   </header>
 
   <p class="print-legend">
-    A power chord (“<strong>5</strong>” chord) = root + fifth. Play <strong>only</strong> the strings shown —
-    ✕ strings stay silent. Dots numbered by finger (1&nbsp;=&nbsp;index · 2&nbsp;=&nbsp;middle ·
-    3&nbsp;=&nbsp;ring · 4&nbsp;=&nbsp;pinky). A “<strong>3fr</strong>” label means the chart starts at the
-    3rd fret instead of the nut.
+    The long <strong>capsule</strong> = your index finger flattened across the strings (the “barre”).
+    Dots are the other fingers (1&nbsp;=&nbsp;index · 2&nbsp;=&nbsp;middle · 3&nbsp;=&nbsp;ring ·
+    4&nbsp;=&nbsp;pinky) · ✕&nbsp;=&nbsp;don't play that string. A “<strong>3fr</strong>” label means the
+    chart starts at the 3rd fret instead of the nut. Slide a shape to a new fret and the root note renames
+    the chord — same shape, every key.
     <span class="no-print"><br>💡 On screen you can tap any chord to hear it.</span>
   </p>
 
   <section class="print-section">
-    <h2>Open power chords</h2>
-    <p>The three freebies — each uses an open string as its root.</p>
-    <div class="print-grid" id="power-open-grid"></div>
+    <h2>E-shape barres — root on the low E string</h2>
+    <p>Barre + E shape = major · barre + Em shape = minor. F and G are rock's workhorses.</p>
+    <div class="print-grid" id="barre-e-grid"></div>
   </section>
 
   <section class="print-section">
-    <h2>The movable shape</h2>
-    <p>Index on the root, ring + pinky two frets up. Slide it anywhere — the root note names the chord.</p>
-    <div class="print-grid" id="power-movable-grid"></div>
+    <h2>A-shape barres — root on the A string</h2>
+    <p>Barre + A shape = major · barre + Am shape = minor. B, Bm and C♯m turn up constantly.</p>
+    <div class="print-grid" id="barre-a-grid"></div>
   </section>
 
   <section class="print-section">
-    <h2>Root-note map — find any power chord</h2>
-    <p>Put the shape's index finger at the fret shown and you're playing that chord.</p>
+    <h2>Root-note map — every barre chord on the neck</h2>
+    <p>Put the barre at the fret shown; the E-shape or A-shape behind it makes it major, the
+    Em/Am shape makes it minor (add “m”).</p>
     <table class="root-map">
-      <tr><th>Fret</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td></tr>
-      <tr><th>Root on low E</th><td><strong>E5</strong></td><td>F5</td><td>F♯5</td><td><strong>G5</strong></td><td>G♯5</td><td><strong>A5</strong></td><td>A♯5</td><td><strong>B5</strong></td><td>C5</td><td>C♯5</td><td><strong>D5</strong></td><td>D♯5</td><td>E5</td></tr>
-      <tr><th>Root on A</th><td><strong>A5</strong></td><td>A♯5</td><td><strong>B5</strong></td><td><strong>C5</strong></td><td>C♯5</td><td><strong>D5</strong></td><td>D♯5</td><td><strong>E5</strong></td><td>F5</td><td>F♯5</td><td><strong>G5</strong></td><td>G♯5</td><td>A5</td></tr>
+      <tr><th>Barre at fret</th><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td></tr>
+      <tr><th>E-shape root (low E)</th><td><strong>F</strong></td><td>F♯</td><td><strong>G</strong></td><td>G♯</td><td><strong>A</strong></td><td>A♯</td><td><strong>B</strong></td><td><strong>C</strong></td><td>C♯</td><td><strong>D</strong></td><td>D♯</td><td>E</td></tr>
+      <tr><th>A-shape root (A)</th><td>A♯</td><td><strong>B</strong></td><td><strong>C</strong></td><td>C♯</td><td><strong>D</strong></td><td>D♯</td><td><strong>E</strong></td><td><strong>F</strong></td><td>F♯</td><td><strong>G</strong></td><td>G♯</td><td>A</td></tr>
     </table>
   </section>
 
-  <footer class="print-footer">Easy Guitar Tabs/Chords — print me, plug in, play loud 🤘</footer>
+  <footer class="print-footer">Easy Guitar Tabs/Chords — print me, practice the squeeze, play every key 🤘</footer>
 </div>
 
 <script src="js/audio.js"></script>
@@ -110,8 +112,8 @@
         new GuitarChords.ChordDiagram(holder, name, { hint: false });
       }
     }
-    fill('power-open-grid', ['E5', 'A5', 'D5']);
-    fill('power-movable-grid', ['F5', 'G5', 'B5', 'C5']);
+    fill('barre-e-grid', ['F', 'G_barre', 'F#m']);
+    fill('barre-a-grid', ['B', 'Bm', 'C#m']);
   })();
 </script>
 </body>
