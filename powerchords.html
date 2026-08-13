@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Power Chord Chart — Easy Guitar Tabs/Chords</title>
+  <meta name="description" content="Power chord shapes and the full root-note map on one printable page.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+  <style>
+    /* Page-specific: a clean, print-friendly reference sheet. */
+    body { background-image: none; }
+    .print-wrap { max-width: 900px; margin: 0 auto; padding: 24px 18px 40px; }
+    .print-header { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+    .print-header h1 { font-size: 1.6rem; margin: 0; letter-spacing: -0.5px; }
+    .print-header h1 em { color: var(--amber-deep); font-style: normal; }
+    .print-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+    .print-legend {
+      color: var(--ink-dim); font-size: 0.92rem; line-height: 1.7;
+      border: 1px solid var(--card-edge); border-radius: 10px;
+      padding: 10px 14px; margin: 16px 0 20px;
+    }
+    .print-section h2 { font-size: 1.1rem; margin: 22px 0 4px; }
+    .print-section p { color: var(--ink-dim); margin: 4px 0 12px; font-size: 0.92rem; }
+    .print-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 14px;
+    }
+    .print-grid .chord-card { cursor: pointer; }
+    .print-grid svg.cd { width: 100%; max-width: 150px; margin: 0 auto; }
+
+    .root-map { width: 100%; border-collapse: collapse; font-size: 0.88rem; margin: 8px 0 4px; }
+    .root-map th, .root-map td {
+      border: 1px solid var(--card-edge);
+      padding: 5px 4px; text-align: center;
+      font-family: var(--mono);
+    }
+    .root-map th { background: var(--bg-soft); font-family: inherit; }
+    .root-map td strong { color: var(--amber-deep); }
+
+    .print-footer { margin-top: 24px; color: var(--ink-dim); font-size: 0.85rem; text-align: center; }
+
+    @media print {
+      .no-print { display: none !important; }
+      body { background: #fff; }
+      .print-wrap { padding: 0; max-width: none; }
+      .print-grid { grid-template-columns: repeat(4, 1fr); gap: 8px; }
+      .print-legend, .chord-card { border-color: #bbb; break-inside: avoid; }
+      .print-section { break-inside: avoid; }
+      .chord-card { box-shadow: none; }
+      svg.cd { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+      .cd-hint { display: none; }
+    }
+  </style>
+</head>
+<body>
+<div class="print-wrap">
+  <header class="print-header">
+    <h1>⚡ Easy Guitar — <em>Power Chords</em></h1>
+    <div class="print-actions no-print">
+      <button class="btn btn-primary" onclick="window.print()">🖨️ Print this page</button>
+      <a class="btn btn-ghost" href="chords.html">🎸 Beginner chords</a>
+      <a class="btn btn-ghost" href="index.html">← Back to lessons</a>
+    </div>
+  </header>
+
+  <p class="print-legend">
+    A power chord (“<strong>5</strong>” chord) = root + fifth. Play <strong>only</strong> the strings shown —
+    ✕ strings stay silent. Dots numbered by finger (1&nbsp;=&nbsp;index · 2&nbsp;=&nbsp;middle ·
+    3&nbsp;=&nbsp;ring · 4&nbsp;=&nbsp;pinky). A “<strong>3fr</strong>” label means the chart starts at the
+    3rd fret instead of the nut.
+    <span class="no-print"><br>💡 On screen you can tap any chord to hear it.</span>
+  </p>
+
+  <section class="print-section">
+    <h2>Open power chords</h2>
+    <p>The three freebies — each uses an open string as its root.</p>
+    <div class="print-grid" id="power-open-grid"></div>
+  </section>
+
+  <section class="print-section">
+    <h2>The movable shape</h2>
+    <p>Index on the root, ring + pinky two frets up. Slide it anywhere — the root note names the chord.</p>
+    <div class="print-grid" id="power-movable-grid"></div>
+  </section>
+
+  <section class="print-section">
+    <h2>Root-note map — find any power chord</h2>
+    <p>Put the shape's index finger at the fret shown and you're playing that chord.</p>
+    <table class="root-map">
+      <tr><th>Fret</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td></tr>
+      <tr><th>Root on low E</th><td><strong>E5</strong></td><td>F5</td><td>F♯5</td><td><strong>G5</strong></td><td>G♯5</td><td><strong>A5</strong></td><td>A♯5</td><td><strong>B5</strong></td><td>C5</td><td>C♯5</td><td><strong>D5</strong></td><td>D♯5</td><td>E5</td></tr>
+      <tr><th>Root on A</th><td><strong>A5</strong></td><td>A♯5</td><td><strong>B5</strong></td><td><strong>C5</strong></td><td>C♯5</td><td><strong>D5</strong></td><td>D♯5</td><td><strong>E5</strong></td><td>F5</td><td>F♯5</td><td><strong>G5</strong></td><td>G♯5</td><td>A5</td></tr>
+    </table>
+  </section>
+
+  <footer class="print-footer">Easy Guitar Tabs/Chords — print me, plug in, play loud 🤘</footer>
+</div>
+
+<script src="js/audio.js"></script>
+<script src="js/chords.js"></script>
+<script>
+  (() => {
+    function fill(gridId, names) {
+      const grid = document.getElementById(gridId);
+      for (const name of names) {
+        const holder = document.createElement('div');
+        grid.appendChild(holder);
+        new GuitarChords.ChordDiagram(holder, name, { hint: false });
+      }
+    }
+    fill('power-open-grid', ['E5', 'A5', 'D5']);
+    fill('power-movable-grid', ['F5', 'G5', 'B5', 'C5']);
+  })();
+</script>
+</body>
+</html>

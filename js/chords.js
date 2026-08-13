@@ -16,12 +16,27 @@ const GuitarChords = (() => {
     E7: { frets: [0, 0, 1, 0, 2, 0],       fingers: [null, null, 1, null, 2, null] },
     A7: { frets: [0, 2, 0, 2, 0, null],    fingers: [null, 3, null, 2, null, null] },
   };
-  const NAMES = Object.keys(CHORDS);
+  const NAMES = Object.keys(CHORDS); // the Lesson 1 / quiz pool
+
+  /* Power chords ("5" chords) — root + fifth (+ octave). Kept separate
+   * from the quiz pool. base > 1 means the chart starts at that fret. */
+  const POWER = {
+    E5: { frets: [null, null, null, 2, 2, 0], fingers: [null, null, null, 2, 1, null] },
+    A5: { frets: [null, null, 2, 2, 0, null], fingers: [null, null, 2, 1, null, null] },
+    D5: { frets: [null, 3, 2, 0, null, null], fingers: [null, 3, 1, null, null, null] },
+    F5: { frets: [null, null, null, 3, 3, 1], fingers: [null, null, null, 4, 3, 1] },
+    G5: { frets: [null, null, null, 5, 5, 3], fingers: [null, null, null, 4, 3, 1], base: 3 },
+    B5: { frets: [null, null, 4, 4, 2, null], fingers: [null, null, 4, 3, 1, null], base: 2 },
+    C5: { frets: [null, null, 5, 5, 3, null], fingers: [null, null, 4, 3, 1, null], base: 3 },
+  };
+  const POWER_NAMES = Object.keys(POWER);
+
+  function shapeOf(name) { return CHORDS[name] || POWER[name]; }
 
   /* Strum a chord: pluck each sounding string low-to-high with a small
    * stagger, like a real downstrum. */
   function strum(name, when = 0, dest = null, vel = 0.9) {
-    const shape = CHORDS[name];
+    const shape = shapeOf(name);
     const ctx = GuitarAudio.ensure();
     const base = Math.max(when, ctx.currentTime);
     let i = 0;
@@ -48,7 +63,8 @@ const GuitarChords = (() => {
 
     render() {
       const showName = this.opts.showName !== false;
-      const chord = CHORDS[this.name];
+      const chord = shapeOf(this.name);
+      const base = chord.base || 1;
       const nutY = showName ? 46 : 26;
       const rowH = 30;
       const bottomY = nutY + 4 * rowH;
@@ -64,8 +80,13 @@ const GuitarChords = (() => {
         if (f === null) svg += `<text class="cd-marker cd-mute" x="${xFor(s)}" y="${nutY - 10}" text-anchor="middle">✕</text>`;
       }
 
-      // nut, frets, strings
-      svg += `<rect class="cd-nut" x="22" y="${nutY - 4}" width="124" height="5" rx="2"/>`;
+      // nut (or a plain line + fret label when the chart starts up the neck)
+      if (base === 1) {
+        svg += `<rect class="cd-nut" x="22" y="${nutY - 4}" width="124" height="5" rx="2"/>`;
+      } else {
+        svg += `<line class="cd-fret" x1="24" y1="${nutY}" x2="144" y2="${nutY}"/>`;
+        svg += `<text class="cd-base" x="148" y="${nutY + rowH / 2 + 4}">${base}fr</text>`;
+      }
       for (let i = 1; i <= 4; i++) {
         svg += `<line class="cd-fret" x1="24" y1="${nutY + i * rowH}" x2="144" y2="${nutY + i * rowH}"/>`;
       }
@@ -77,7 +98,7 @@ const GuitarChords = (() => {
       for (let s = 0; s < 6; s++) {
         const f = chord.frets[s];
         if (!f) continue;
-        const cy = nutY + (f - 0.5) * rowH;
+        const cy = nutY + (f - base + 0.5) * rowH;
         svg += `<circle class="cd-dot" cx="${xFor(s)}" cy="${cy}" r="10.5"/>`;
         const finger = chord.fingers[s];
         if (finger) svg += `<text class="cd-finger" x="${xFor(s)}" y="${cy + 4.5}" text-anchor="middle">${finger}</text>`;
@@ -96,5 +117,5 @@ const GuitarChords = (() => {
     }
   }
 
-  return { CHORDS, NAMES, strum, ChordDiagram };
+  return { CHORDS, NAMES, POWER, POWER_NAMES, shapeOf, strum, ChordDiagram };
 })();

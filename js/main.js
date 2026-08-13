@@ -47,15 +47,28 @@
   const MODE_KEY = 'easy-guitar-tabs-mode';
   const NAV_LABELS = {
     tabs: ['Read Tabs', 'Note Quiz', 'First Riffs', 'Link It Up', 'Play Songs'],
-    chords: ['Read Chords', 'Chord Quiz', 'First Changes', 'Progressions', 'Strum Songs'],
+    chords: ['Read Chords', 'Chord Quiz', 'First Changes', 'Progressions', 'Strum Songs', 'Power Chords'],
   };
   let currentMode = 'tabs';
   let currentLessonNum = 1;
 
   const nav = document.getElementById('lesson-nav');
-  const navBtns = [...nav.querySelectorAll('button')];
+  let navBtns = [];
   const sectionEls = [...document.querySelectorAll('.lesson')];
   const modeSwitch = document.getElementById('mode-switch');
+
+  function buildNav(mode) {
+    nav.innerHTML = '';
+    nav.classList.toggle('compact', NAV_LABELS[mode].length > 5);
+    NAV_LABELS[mode].forEach((label, i) => {
+      const b = document.createElement('button');
+      b.dataset.lesson = i + 1;
+      const isBonus = mode === 'chords' && i === 5;
+      b.innerHTML = `<span class="step">${isBonus ? '⚡' : i + 1}</span> ${label}`;
+      nav.appendChild(b);
+    });
+    navBtns = [...nav.querySelectorAll('button')];
+  }
 
   const lessonKey = n => (currentMode === 'chords' ? 'c' : '') + n;
 
@@ -76,9 +89,8 @@
     localStorage.setItem(MODE_KEY, mode);
     modeSwitch.querySelectorAll('button').forEach(b =>
       b.classList.toggle('active', b.dataset.mode === mode));
-    navBtns.forEach((b, i) => {
-      b.innerHTML = `<span class="step">${i + 1}</span> ${NAV_LABELS[mode][i]}`;
-    });
+    buildNav(mode);
+    if (currentLessonNum > NAV_LABELS[mode].length) currentLessonNum = 1;
     renderPips();
     showLesson(currentLessonNum);
   }
@@ -95,7 +107,7 @@
   function renderPips() {
     const wrap = document.getElementById('progress-pips');
     wrap.innerHTML = '';
-    for (let i = 1; i <= 5; i++) {
+    for (let i = 1; i <= NAV_LABELS[currentMode].length; i++) {
       const done = !!progress.lessons[lessonKey(i)];
       const pip = document.createElement('span');
       pip.className = 'pip' + (done ? ' done' : '');
@@ -385,6 +397,12 @@
   wireSpeedTrainer('#c-speed-trainer', makePlayer('#player-magic', TabData.chordDrills.magic, {
     loop: true, metronome: true, view: 'chords',
   }));
+
+  /* ── chords lesson 6 : power chords (bonus) ────────────────── */
+  fillChordRow('power-open', ['E5', 'A5', 'D5']);
+  fillChordRow('power-movable-e', ['F5', 'G5']);
+  fillChordRow('power-movable-a', ['B5', 'C5']);
+  makePlayer('#player-power', TabData.powerDemo, { loop: true, metronome: true, view: 'chords' });
 
   /* ══════════════ SONG LESSONS (shared by both tracks) ══════════════ */
 

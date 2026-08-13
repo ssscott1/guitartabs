@@ -109,6 +109,7 @@ main { max-width: 980px; margin: 0 auto; padding: 0 18px 60px; }
 }
 .lesson-nav button {
   flex: 1 1 auto;
+  max-width: 230px; /* a lone wrapped button becomes a chip, not a banner */
   display: flex; align-items: center; justify-content: center; gap: 8px;
   padding: 10px 14px;
   font: inherit; font-weight: 650; font-size: 0.92rem;
@@ -119,6 +120,8 @@ main { max-width: 980px; margin: 0 auto; padding: 0 18px 60px; }
   cursor: pointer;
   transition: all 0.15s;
 }
+/* six buttons (Chords track) — tighten so they fit on one row */
+.lesson-nav.compact button { padding: 9px 10px; font-size: 0.85rem; gap: 6px; }
 .lesson-nav button:hover { color: var(--ink); border-color: var(--amber-deep); }
 .lesson-nav button.active {
   background: var(--amber); border-color: var(--amber);
@@ -391,6 +394,7 @@ a.btn { display: inline-block; text-decoration: none; }
 .cd-dot { fill: var(--amber); }
 .cd-finger { fill: #241a02; font-weight: 800; font-size: 13px; }
 .cd-hint { color: var(--ink-dim); font-size: 0.7rem; margin-top: 4px; }
+.cd-base { fill: var(--ink-dim); font-size: 11px; font-weight: 700; }
 
 /* ── chord-chart player view (progressions & strum songs) ─── */
 

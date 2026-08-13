@@ -197,7 +197,7 @@ const TabData = (() => {
     let t = 0;
     for (const [name, beats] of steps) {
       labels.push({ t, name });
-      const frets = GuitarChords.CHORDS[name].frets;
+      const frets = GuitarChords.shapeOf(name).frets;
       for (let b = 0; b < beats; b++) {
         for (let s = 0; s < 6; s++) {
           if (frets[s] != null) notes.push({ s, f: frets[s], t: t + b, d: 1 });
@@ -224,6 +224,9 @@ const TabData = (() => {
     magic: chordSong('magic', 'G → Em → C → D', 85, 4, 2, '',
       [['G', 4], ['Em', 4], ['C', 4], ['D', 4]]),
   };
+
+  const powerDemo = chordSong('power', 'E5 → G5 → A5', 90, 4, 2, '',
+    [['E5', 4], ['G5', 2], ['A5', 2], ['E5', 4], ['G5', 2], ['D5', 2]]);
 
   const chordSongs = [
     chordSong('c-twinkle', 'Twinkle Twinkle (strum-along)', 90, 4, 1,
@@ -255,6 +258,6 @@ const TabData = (() => {
     riffs: { riff1, riff2, riff3 },
     links: { linkA, linkB, linkAB },
     songs: [twinkle, odeToJoy, saints, blues, greensleeves],
-    chordDemo, chordDrills, chordSongs,
+    chordDemo, chordDrills, chordSongs, powerDemo,
   };
 })();

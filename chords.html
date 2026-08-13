@@ -14,7 +14,7 @@
     .print-header { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
     .print-header h1 { font-size: 1.6rem; margin: 0; letter-spacing: -0.5px; }
     .print-header h1 em { color: var(--amber-deep); font-style: normal; }
-    .print-actions { display: flex; gap: 10px; }
+    .print-actions { display: flex; gap: 10px; flex-wrap: wrap; }
     .print-legend {
       color: var(--ink-dim); font-size: 0.92rem; line-height: 1.7;
       border: 1px solid var(--card-edge); border-radius: 10px;
@@ -47,6 +47,7 @@
     <h1>🎸 Easy Guitar — <em>The 10 Beginner Chords</em></h1>
     <div class="print-actions no-print">
       <button class="btn btn-primary" onclick="window.print()">🖨️ Print this page</button>
+      <a class="btn btn-ghost" href="powerchords.html">⚡ Power chords</a>
       <a class="btn btn-ghost" href="index.html">← Back to lessons</a>
     </div>
   </header>

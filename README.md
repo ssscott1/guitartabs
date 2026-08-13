@@ -36,8 +36,13 @@ and it works as-is.
 | 4 | **Link It Up** — join riff A to riff B + Speed Trainer (+5%/loop) | **Progressions** — build G–Em–C–D shown as chord charts + Speed Trainer |
 | 5 | **Play Songs** — five melodies with tap-along scoring and stars | **Strum Songs** — five chord songs shown as chord charts with strum dots, strum-along scoring |
 
-There's also a standalone printable reference (`chords.html`, linked from
-Read Chords) with all 10 chords on one page.
+The Chords track has a bonus sixth lesson, **⚡ Power Chords**: what "5"
+chords are, the open E5/A5/D5 shapes, the movable shape with base-fret
+("3fr") charts, and a looping E5–G5–A5 demo.
+
+There are also standalone printable references, linked from the lessons:
+`chords.html` (all 10 beginner chords) and `powerchords.html` (power chord
+shapes plus a full root-note map).
 
 All playback runs through the same engine: scrolling highlight, tempo
 slider, loop, metronome, count-in, and **Play-Along Mode** (tap Space or the
@@ -55,6 +60,7 @@ remembered in `localStorage`) overrides it.
 | --- | --- |
 | `index.html` | All ten lesson pages, both tracks (single-page app) |
 | `chords.html` | Printable one-page chord reference |
+| `powerchords.html` | Printable power chord shapes + root-note map |
 | `css/style.css` | The whole look |
 | `js/audio.js` | Guitar synth + metronome (Web Audio API) |
 | `js/chords.js` | Chord shapes, strum helper, clickable chord-chart component |
